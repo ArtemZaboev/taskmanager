@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+    <meta charset="UTF-8" http-equiv="Content-Style" content="text/html" />
+    <title>login</title>
+    <link type="text/css" rel="stylesheet" href="/libs/webix/webix.css">
+    <script src="/libs/webix/webix.js"></script>
+    <script data-main="js/login" src="libs/require.min.js"></script>
+    <link rel="shortcut icon" href="#"/>
+    <link type="text/css" rel="stylesheet" href="/css/login.css">
+
+
+</head>
+<body>
+
+<!--<form class="form-1" th:action="@{/login}" method="post">-->
+<!--    <p class="field">-->
+<!--        <input type="text" name="username"  placeholder="Username">-->
+
+<!--</p>-->
+<!--<p class="field">-->
+<!--    <input type="password" name="pass" placeholder="Password">-->
+
+<!--</p>-->
+<!--<p class="submit">-->
+<!--    <input type="submit" id="loginbutton" name="submit" value="Log in">-->
+
+<!--</p>-->
+<!--</form>-->
+<div th:if="${error}">
+    Invalid username and password.
+</div>
+<form id="login"></form>
+
+
+
+</body>
+</html>
