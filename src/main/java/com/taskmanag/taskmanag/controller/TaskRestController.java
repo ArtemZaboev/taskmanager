@@ -26,12 +26,10 @@ public class TaskRestController {
 
     @GetMapping
     public Page<Task> list(@PageableDefault Pageable pageable,@AuthenticationPrincipal User user){
-        log.info("User: "+user+" login!");
         return taskRestService.findByUserId(pageable,user.getId());
     }
 
 
-    //ПРОвермит метод на безопасность
     @GetMapping("{id}")
     public Task getOne(@PathVariable("id") Task task){
         return task;
@@ -52,14 +50,12 @@ public class TaskRestController {
     public Task update(@PathVariable("id") Task dbTask,@RequestBody Task task){
         BeanUtils.copyProperties(task,dbTask,"id");
         return taskRestService.save(dbTask);
-//    return taskRestService.update(id,task);
     }
 
         @PostMapping("/mail")
     public void mailTask(@AuthenticationPrincipal User user){
             taskRestService.mailTasks(user);
             log.info("User "+user+" send list to email");
-//        return "redirect:/tasks";
     }
 
 

@@ -1,13 +1,67 @@
 define(function () {
 
+function add(){
+    var taskList_id=$$("taskList");
+    var taskcreate11=$$("taskcreate11");
+    taskList_id.add({
+        'title': taskcreate11.elements.title.getValue(),
+        'description': taskcreate11.elements.description.getValue(),
+        'time': taskcreate11.elements.time.getValue()
+    });
+    taskcreate11.clear();
+}
+
+        webix.ui({
+        view: "sidemenu",
+        id: "menu",
+        width: 400,
+        position: "right",
+        state:function(state){
+            var toolbarHeight = $$("toolbar").$height;
+            state.top = toolbarHeight;
+            state.height -= toolbarHeight;
+        },
+        css: "my_menu",
+        body:{
+            view:"form",
+            id: 'taskcreate11',
+            borderless:true,
+            scroll: false,
+            elements: [
+                {view: "text", label: "Title", name: 'title'},
+                {view: "text", label: "Description", name: 'description'},
+                {view: "text", label: "Time", name: 'time'},
+                {
+                    cols: [
+                        {
+                            view: 'button',
+                            label: 'Create',
+                            click: function () {
+                                add();
+                                $$("menu").hide();
+
+                            }
+                        }
+                    ]
+                }
+            ],
+            select:true,
+            type:{
+                height: 40
+            }
+        }
+    });
 
     return {
+        id:'main',
         type:"clean",
         css:{background: "rgba(21,255,46,0.15)"},
 
         rows: [
-            {},
             {
+            },
+            {
+                id:'toolbar',
                 view:'toolbar',
                 cols:[
                     {   view:'button',
@@ -17,14 +71,13 @@ define(function () {
                         css:"webix_primary",
                         // align:center,
                         click:function () {
-                            var taskList_id = $$('taskList');
-                            var createForm = $$('taskcreate');
-                            taskList_id.add({
-                                'title': createForm.elements.title.getValue(),
-                                'description': createForm.elements.description.getValue(),
-                                'time': createForm.elements.time.getValue()
-                            });
-                            createForm.clear();
+                            taskList = $$('taskList');
+                            if( $$("menu").config.hidden){
+                                $$("menu").show();
+                            }
+                            else
+                                $$("menu").hide();
+
                         }
                     },
                     {
@@ -45,7 +98,8 @@ define(function () {
                             }
                         }
                     },
-                    {},
+
+                    {}
                 ]
             },
             {cols:[
@@ -61,8 +115,8 @@ define(function () {
                                 columns: [
                                     // {id:'id'},
                                     {id: 'title', editor: 'text',width:150,header:'Name'},
-                                    {id: 'description', editor: 'text',width:450,header:'Description',},
-                                    {id: 'time', editor: 'text',width:150,header:'Time',}
+                                    {id: 'description', editor: 'text',width:450,header:'Description'},
+                                    {id: 'time', editor: 'text',width:150,header:'Time'}
                                 ],
                                 url: 'resource->/api/task',
                                 save: 'resource->/api/task',
@@ -74,7 +128,7 @@ define(function () {
                                 // editable: true,
                                 select: "row",
                                 pager: 'taskPager',
-                                datafetch: 7,
+                                datafetch: 7
                                 // form: 'taskcreate'
                                 // gravity: 3
                             },
@@ -88,46 +142,11 @@ define(function () {
                             }
                     ]
                     },
-                    {gravity:0.5},
-                    {
-                        rows: [
-                            {
-                                id: 'taskcreate',
-                                autowidth:true,
-                                view: 'form',
-                                gravity:3,
-                                elements: [
-                                    {view: "text", label: "Title", name: 'title'},
-                                    {view: "text", label: "Description", name: 'description'},
-                                    {view: "text", label: "Time", name: 'time'},
-                                    {
-                                        cols: [
-                                            {
-                                                view: 'button',
-                                                label: 'Create',
-                                                click: function () {
-                                                    var taskList_id = $$('taskList');
-                                                    var createForm = $$('taskcreate');
-                                                    taskList_id.add({
-                                                        'title': createForm.elements.title.getValue(),
-                                                        'description': createForm.elements.description.getValue(),
-                                                        'time': createForm.elements.time.getValue()
-                                                    });
-                                                    createForm.clear();
-
-                                                }
-                                            }
-                                        ]
-                                    }
-                                ]
-                            },
-                            {}
-
-                                ]
-                    },
                     {gravity:0.3}
-                    ]},
+                    ]}
 
         ]
+
+
     }
-})
+});
