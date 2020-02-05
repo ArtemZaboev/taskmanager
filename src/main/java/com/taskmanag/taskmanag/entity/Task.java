@@ -31,9 +31,4 @@ public class Task {
     //change type this variable
     @Column(name = "time")
     private int time;
-
-
-
-
-    //    private Data data;
 }

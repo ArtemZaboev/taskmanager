@@ -11,45 +11,81 @@ function add(){
     taskcreate11.clear();
 }
 
-        webix.ui({
-        view: "sidemenu",
-        id: "menu",
-        width: 400,
-        position: "right",
-        state:function(state){
-            var toolbarHeight = $$("toolbar").$height;
-            state.top = toolbarHeight;
-            state.height -= toolbarHeight;
-        },
-        css: "my_menu",
-        body:{
-            view:"form",
-            id: 'taskcreate11',
-            borderless:true,
-            scroll: false,
-            elements: [
-                {view: "text", label: "Title", name: 'title'},
-                {view: "text", label: "Description", name: 'description'},
-                {view: "text", label: "Time", name: 'time'},
+    webix.ui({
+
+                view: "sidemenu",
+                id: "menu",
+                width: 600,
+                position: "right",
+                state: function (state) {
+                    var toolbarHeight = $$("toolbar").$height;
+                    state.top = toolbarHeight;
+                    state.height -= toolbarHeight;
+                },
+                css: "my_menu",
+        body: {
+            rows: [
+                {
+                    gravity:0.7
+                },
                 {
                     cols: [
                         {
-                            view: 'button',
-                            label: 'Create',
-                            click: function () {
-                                add();
-                                $$("menu").hide();
+                            gravity:1
+                        },
+                        {
+                            view: "form",
+                            gravity:6.2,
+                            id: 'taskcreate11',
+                            borderless: true,
+                            scroll: false,
+                            elements: [
+                                {view: "text", label: "Title", name: 'title',height:50},
+                                {},
+                                {view: "textarea", label: "Description", name: 'description',height:200},
+                                {
+                                    // view:"datepicker",
+                                    // format:"%H:%i",
+                                    // suggest:{
+                                    //     type:"calendar",
+                                    //     body:{
+                                    //         type:"time",
+                                    //         calendarTime:"%H:%i"
+                                    //     }},
+                                    view:'text',
 
+                                    label: "Time", name: 'time', height:100},
+                                {
+                                    cols: [
+                                        {gravity:2},
+                                        {
+                                            view: 'button',
+                                            label: 'Create',
+                                            height:65,
+                                            click: function () {
+                                                add();
+                                                $$("menu").hide();
+
+                                            }
+                                        }
+                                    ]
+                                }
+                            ],
+                            select: true,
+                            type: {
+                                height: 40
                             }
-                        }
-                    ]
+                        },
+                        {gravity:1}
+
+                        ]
+                },
+                {
+                    gravity:2
                 }
-            ],
-            select:true,
-            type:{
-                height: 40
-            }
+            ]
         }
+
     });
 
     return {
@@ -62,8 +98,10 @@ function add(){
             },
             {
                 id:'toolbar',
+                css:{background: "rgba(21,255,46,0.01)"},
                 view:'toolbar',
                 cols:[
+                    {gravity:1},
                     {   view:'button',
                         label:'New Task',
                         width:120,
@@ -79,6 +117,17 @@ function add(){
                                 $$("menu").hide();
 
                         }
+                    },
+                    {
+                        view: "button",
+                        label: 'Update',
+                        width: 120,
+                        type: "iconTop", height: 55,
+                        css: "webix_primary",
+                        click:function () {
+                            webix.alert("Update");
+                        }
+
                     },
                     {
                         view:'button',
@@ -98,8 +147,7 @@ function add(){
                             }
                         }
                     },
-
-                    {}
+                    {gravity:1}
                 ]
             },
             {cols:[
