@@ -4,3 +4,13 @@
 .toolbar{
         background-color: rgba(21,255,46,0.15);
 }
+
+.webix_table_checkbox{
+        width:22px;
+        height:22px;
+        margin-top:5px;
+}
+
+.webix_cell{
+
+}

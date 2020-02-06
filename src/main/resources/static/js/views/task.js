@@ -3,13 +3,36 @@ define(function () {
 function add(){
     var taskList_id=$$("taskList");
     var taskcreate11=$$("taskcreate11");
+    var timeV=taskcreate11.elements.time.getValue();
+    var time=timeV.getHours()+" h  "+timeV.getMinutes()+" m";
     taskList_id.add({
         'title': taskcreate11.elements.title.getValue(),
         'description': taskcreate11.elements.description.getValue(),
-        'time': taskcreate11.elements.time.getValue()
+        'time': time
     });
     taskcreate11.clear();
 }
+
+webix.ui({
+    view:"popup",
+    body: {
+        view: 'form',
+        id: 'newform',
+        elements: [
+            {view: "text", name: "title"},
+            {view: "textarea", name: "description",height:100},
+            {view: "text", name: "time"},
+            {
+                view: "button", label: "Save", type: "form", click: function (id) {
+                    var form = $$(id).getFormView();
+                    var values = form.getValues();
+                    $$("taskList").updateItem(values.id, values);
+                }
+            }
+        ]
+    }
+
+});
 
     webix.ui({
 
@@ -44,15 +67,15 @@ function add(){
                                 {},
                                 {view: "textarea", label: "Description", name: 'description',height:200},
                                 {
-                                    // view:"datepicker",
-                                    // format:"%H:%i",
-                                    // suggest:{
-                                    //     type:"calendar",
-                                    //     body:{
-                                    //         type:"time",
-                                    //         calendarTime:"%H:%i"
-                                    //     }},
-                                    view:'text',
+                                    view:"datepicker",
+                                    format:"%H:%i",
+                                    suggest:{
+                                        type:"calendar",
+                                        body:{
+                                            type:"time",
+                                            calendarTime:"%H:%i"
+                                        }},
+                                    // view:'text',
 
                                     label: "Time", name: 'time', height:100},
                                 {
@@ -120,12 +143,14 @@ function add(){
                     },
                     {
                         view: "button",
-                        label: 'Update',
+                        label: 'Export to PDF',
                         width: 120,
                         type: "iconTop", height: 55,
                         css: "webix_primary",
                         click:function () {
-                            webix.alert("Update");
+                            webix.toPDF($$("taskList"), { autowidth:true,autoheight:true,
+                                columns:{ title:true, description:true,time:true},
+                                filename:"taskList" });
                         }
 
                     },
@@ -160,24 +185,29 @@ function add(){
                                 view: 'datatable',
                                 id: 'taskList',
                                 gravity:5,
+                                spans:true,
+                                drag:true,
                                 columns: [
                                     // {id:'id'},
-                                    {id: 'title', editor: 'text',width:150,header:'Name'},
-                                    {id: 'description', editor: 'text',width:450,header:'Description'},
-                                    {id: 'time', editor: 'text',width:150,header:'Time'}
+                                    {id: 'title', width:150,header:'Name'},
+                                    {id: 'description',width:300,header:'Description'},
+                                    {id: 'time', width:150,header:'Time'},
+                                    {id:'completed',width:120,css:"center",template:"{common.checkbox()}",
+                                        header:'Completed', editor:"checkbox"}
                                 ],
                                 url: 'resource->/api/task',
                                 save: 'resource->/api/task',
                                 // autoheight: true,
                                 autowidth: true,
                                 height:720,
-                                // columnWidth:300,
+                                // scroll:false,
                                 rowHeight:100,
-                                // editable: true,
+                                // resizeRow:true,
+                                editable: true,
                                 select: "row",
                                 pager: 'taskPager',
-                                datafetch: 7
-                                // form: 'taskcreate'
+                                datafetch: 7,
+                                form: 'newform'
                                 // gravity: 3
                             },
                             {

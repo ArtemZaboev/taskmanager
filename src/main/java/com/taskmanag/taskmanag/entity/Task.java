@@ -1,12 +1,12 @@
 package com.taskmanag.taskmanag.entity;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.util.Date;
 
 @Data
 //@NoArgsConstructor(access = AccessLevel.PRIVATE,force = true)
@@ -30,5 +30,9 @@ public class Task {
 
     //change type this variable
     @Column(name = "time")
-    private int time;
+    private String time;
+
+    @Column(name = "complete")
+    private boolean completed;
+
 }
