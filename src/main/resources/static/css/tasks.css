@@ -1,16 +1,38 @@
+
+
+
 .toolbarColor{
-        background-color: rgba(1, 41, 15, 0.99);
+    background-color: rgba(1, 41, 15, 0.99);
 }
 .toolbar{
-        background-color: rgba(21,255,46,0.15);
+    background-color: rgba(21,255,46,0.15);
 }
 
 .webix_table_checkbox{
-        width:22px;
-        height:22px;
-        margin-top:5px;
+    width:22px;
+    height:22px;
+    margin-top:5px;
 }
 
 .webix_cell{
 
+}
+
+.webix_ss_body {
+    font-size: 2em;
+}
+
+.webix_ss_header, .webix_ss_header TD, .webix_ss_vscroll_header, .webix_dd_drag_column {
+    color: #1992af;
+    font-size: 25px;
+    background: #ffffff;
+}
+.webix_view.webix_dtable{
+    background-color: #ff5c4c;
+    font-family: cursive;
+    color: floralwhite;
+}
+
+.webix_img_btn_text{
+    bottom: 22px;
 }
