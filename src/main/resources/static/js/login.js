@@ -9,6 +9,8 @@ require(
                         {
                             view:'button',
                             label:'Sign up',
+                            type:"iconTop",
+                            css:"webix_primary",
                             height:50,
                             click:function () {
                                 window.document.location='/registration'
@@ -31,7 +33,7 @@ require(
                                                 label: "Password",
                                                 height: 50,
                                                 name: 'pass'
-                                            },
+                                            }
 
                                         ]
                                     }
@@ -40,11 +42,12 @@ require(
                                     cols: [
                                         {gravity: 1.5},
                                         {
-                                            view: "button", label: "Login", type: "form", height: 50,
+                                                view: "button", label: "Login", type: "form", height: 50,
+                                            css:"webix_primary",
 
                                             click: function () {
                                                 var values = $$('loginform').getValues();
-                                                webix.ajax().post('/login', values, function (args) {
+                                                webix.ajax().post('/login', values, function () {
                                                     window.document.location = '/'
                                                 })
 
@@ -55,7 +58,7 @@ require(
                                     ]
                                 }
                             ]
-                        },
+                        }
 
                     ]
 
@@ -63,4 +66,4 @@ require(
             }
         )
     }
-)
+);

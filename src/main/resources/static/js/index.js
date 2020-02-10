@@ -1,6 +1,6 @@
 requirejs.config({
     baseUrl: 'js'
-})
+});
 
 
 
@@ -29,7 +29,9 @@ require(
                         css:'toolbarColor',
                         color:'',
                         cols: [
-                            {}, {}, {}, {}, {}, {}, {},{},{},{},{},{},
+                            {}, {template:'Task Manager',gravity:4,css:'mainHeader'}, {}, {},
+                            {},
+                            {},{},{},{},{},{},{},{},
                             {
                                 view:'button',
                                 label:"Send to email",
@@ -62,7 +64,7 @@ require(
 
                             ]
                     },
-                    {id: 'root',
+                    {id: 'root'
                     }
                 ]
 
@@ -70,7 +72,7 @@ require(
 
 
             routie({
-                '': buildRoute(task),
+                '': buildRoute(task)
 
 
             })
@@ -80,7 +82,7 @@ require(
 
 
     }
-)
+);
 
 
 

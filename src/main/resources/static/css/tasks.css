@@ -36,3 +36,14 @@
 .webix_img_btn_text{
     bottom: 22px;
 }
+
+div.webix_view.mainHeader{
+    font-size: 3em;
+    background-color:rgba(0,0,0,0);
+    color:#ff5c4c;
+    border-color: rgba(0,0,0,0);
+}
+
+div.webix_ss_center{
+    background-color: #ff5c4c;
+}

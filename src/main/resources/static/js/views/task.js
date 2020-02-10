@@ -188,8 +188,8 @@ define(function () {
                                 spans:true,
                                 drag:true,
                                 columns: [
-                                    {id:'id'},
-                                    {id: 'title', width:180,header:'Name'},
+                                    {id:'id',width:100},
+                                    {id: 'title', width:200,header:'Name'},
                                     {id: 'description',width:400,header:'Description'},
                                     {id: 'time', width:200,header:'Time'},
                                     {id:'completed',width:150,css:"center",template:"{common.checkbox()}",

@@ -3,4 +3,23 @@
     position: absolute;
     left: 34%;
     top:25%;
+    background-color: rgba(255,92,76,0);
 }
+body{
+    /*background-color: rgba(255,92,76,0.5);*/
+    background-color:  rgba(28,161,193,0.3);
+}
+
+.webix_view.webix_form.webix_layout_form{
+    background-color:  rgba(28,161,193,0.3);
+
+}
+
+.webix_view.webix_fieldset{
+    background-color:  rgba(28,161,193,0);
+}
+
+
+
+
+
