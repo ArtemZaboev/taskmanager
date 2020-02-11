@@ -142,16 +142,39 @@ define(function () {
                         }
                     },
                     {
-                        view: "button",
-                        label: 'Export to PDF',
-                        width: 150,
-                        type: "iconTop", height: 70,
+                        view: "menu",
+                        data: [
+                            {
+                                id: "exportTo", value: 'Export to',
+                                submenu: [
+                                    {id:"pdf",value: "PDF"},
+                                    {id:"excel",value: "Excel"},
+                                    {id:"print",value: "Print"}
+                                ]
+                            }
+                        ],
+                        type:{
+                            height:53,
+                            width:120
+                        },
+                        width: 120,
                         css: "webix_primary",
-                        click:function () {
-                            webix.toPDF($$("taskList"), { autowidth:true,autoheight:true,
-                                columns:{ title:true, description:true,time:true},
-                                filename:"taskList" });
+                        on: {
+                            onMenuItemClick: function (id) {
+                                if(id=='pdf'){
+                                    webix.toPDF($$("taskList"), { autowidth:true,autoheight:true,
+                                                columns:{ title:true, description:true,time:true},
+                                                filename:"taskList" });
+                                }
+                                else if(id=='excel'){
+                                    webix.toExcel($$("taskList"));
+                                }
+                                else if(id=='print'){
+                                    webix.print($$("taskList"),{scroll:true});
+                                }
+                            }
                         }
+
 
                     },
                     {
